@@ -45,6 +45,32 @@ def _():
 
     # Show the first few rows
     apple.head()
+    return (apple,)
+
+
+@app.cell
+def _(apple):
+    import plotly.graph_objects as go
+
+    # Create interactive stock price chart
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatter(
+        x=apple.index,
+        y=apple["Close"]["AAPL"],
+        mode="lines",
+        name="Closing Price",
+        line=dict(color="royalblue", width=2)
+    ))
+
+    fig.update_layout(
+        title="Apple Inc. (AAPL) - Stock Closing Price (Past Year)",
+        xaxis_title="Date",
+        yaxis_title="Price (USD)",
+        template="plotly_white"
+    )
+
+    fig
     return
 
 
