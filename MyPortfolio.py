@@ -112,5 +112,26 @@ def _(apple, go, metric):
     return
 
 
+@app.cell
+def _(apple, mo):
+    # Summary statistics
+    avg_price = apple["Close"]["AAPL"].mean()
+    max_price = apple["Close"]["AAPL"].max()
+    min_price = apple["Close"]["AAPL"].min()
+    latest_price = apple["Close"]["AAPL"].iloc[-1]
+
+    mo.md(f"""
+    ## 📊 Apple Inc. (AAPL) — Key Statistics (Past Year)
+
+    | Metric | Value |
+    |--------|-------|
+    | 📈 Latest Closing Price | ${latest_price:.2f} |
+    | 📊 Average Closing Price | ${avg_price:.2f} |
+    | 🔺 Highest Closing Price | ${max_price:.2f} |
+    | 🔻 Lowest Closing Price | ${min_price:.2f} |
+    """)
+    return
+
+
 if __name__ == "__main__":
     app.run()
