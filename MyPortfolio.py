@@ -71,6 +71,44 @@ def _(apple):
     )
 
     fig
+    return (go,)
+
+
+@app.cell
+def _(mo):
+    # Interactive dropdown to select metric
+    metric = mo.ui.dropdown(
+        options=["Close", "Open", "High", "Low", "Volume"],
+        value="Close",
+        label="Select a metric to display:"
+    )
+    metric
+    return (metric,)
+
+
+@app.cell
+def _(apple, go, metric):
+    # Chart that updates based on dropdown selection
+    selected = metric.value
+
+    fig2 = go.Figure()
+
+    fig2.add_trace(go.Scatter(
+        x=apple.index,
+        y=apple[selected]["AAPL"],
+        mode="lines",
+        name=selected,
+        line=dict(color="royalblue", width=2)
+    ))
+
+    fig2.update_layout(
+        title=f"Apple Inc. (AAPL) - {selected} (Past Year)",
+        xaxis_title="Date",
+        yaxis_title="Value",
+        template="plotly_white"
+    )
+
+    fig2
     return
 
 
