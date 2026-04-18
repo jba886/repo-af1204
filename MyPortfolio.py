@@ -35,5 +35,18 @@ def _(mo):
     return
 
 
+@app.cell
+def _():
+    import yfinance as yf
+    import pandas as pd
+
+    # Download Apple stock data for the past year
+    apple = yf.download("AAPL", period="1y")
+
+    # Show the first few rows
+    apple.head()
+    return
+
+
 if __name__ == "__main__":
     app.run()
